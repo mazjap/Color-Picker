@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19E266" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Color" representedClassName="Color" syncable="YES" codeGenerationType="class">
+        <attribute name="hex" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="favoritesList" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Favorites" inverseName="colors" inverseEntity="Favorites"/>
+    </entity>
+    <entity name="Favorites" representedClassName="Favorites" syncable="YES" codeGenerationType="class">
+        <relationship name="colors" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Color" inverseName="favoritesList" inverseEntity="Color"/>
+    </entity>
+    <elements>
+        <element name="Color" positionX="-63" positionY="-18" width="128" height="103"/>
+        <element name="Favorites" positionX="-54" positionY="18" width="128" height="58"/>
+    </elements>
+</model>
