@@ -11,8 +11,16 @@ import UIKit
 extension String {
     var isValidateHex: Bool {
         let allPossible = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"]
+        var iterate = self
+        if self.first == "#".first {
+            iterate = self[1..<count]
+        }
         
-        for char in self {
+        if iterate.count > 6 {
+            return false
+        }
+        
+        for char in iterate {
             if !allPossible.contains(String(char).lowercased()) {
                 return false
             }
@@ -21,14 +29,20 @@ extension String {
         return true
     }
     
+    var hexUInt: UInt32 {
+        let scanner = Scanner(string: self.remove(char: "#".first!))
+        var hexNumber: UInt32 = 0
+
+        if scanner.scanHexInt32(&hexNumber) { // TODO: Find a better way of converting a hex string to UInt32
+            return hexNumber
+        } else {
+            return 0
+        }
+    }
+    
     func getColors() -> (red: CGFloat, green: CGFloat, blue: CGFloat) {
         if isValidateHex {
-            let scanner = Scanner(string: self)
-            var hexNumber: UInt32 = 0
-
-            if scanner.scanHexInt32(&hexNumber) {
-                return hexNumber.colors
-            }
+            return hexUInt.colors
         }
         
         return (0, 0, 0)

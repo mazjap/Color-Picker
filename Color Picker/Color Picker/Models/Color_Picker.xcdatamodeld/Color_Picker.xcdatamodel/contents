@@ -4,13 +4,8 @@
         <attribute name="hex" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="name" optional="YES" attributeType="String"/>
-        <relationship name="favoritesList" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Favorites" inverseName="colors" inverseEntity="Favorites"/>
-    </entity>
-    <entity name="Favorites" representedClassName="Favorites" syncable="YES" codeGenerationType="class">
-        <relationship name="colors" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Color" inverseName="favoritesList" inverseEntity="Color"/>
     </entity>
     <elements>
-        <element name="Color" positionX="-63" positionY="-18" width="128" height="103"/>
-        <element name="Favorites" positionX="-54" positionY="18" width="128" height="58"/>
+        <element name="Color" positionX="-63" positionY="-18" width="128" height="88"/>
     </elements>
 </model>

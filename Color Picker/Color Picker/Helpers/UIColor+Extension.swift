@@ -20,7 +20,6 @@ extension UIColor {
     }
     
     var textColor: UIColor {
-        print(rgba.red + rgba.green + rgba.blue)
         if rgba.red + rgba.green + rgba.blue > 555 { // 255 * 3 (r, g, b) - 210 (70 each) (if it's too bright, make text black)
             return UIColor.black
         }

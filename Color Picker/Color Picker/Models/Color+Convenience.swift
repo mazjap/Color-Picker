@@ -24,4 +24,8 @@ extension Color {
     var color: UIColor {
         UIColor(hexInt: UInt32(hex))
     }
+    
+    static func == (lhs: Color, rhs: ColorRepresentation) -> Bool {
+        return lhs.name == rhs.name && UInt32(lhs.hex) == rhs.hex
+    }
 }
