@@ -96,6 +96,10 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         starButton.addGestureRecognizer(tapGesture)
         starButton.addGestureRecognizer(holdGesture)
         
+        
+        let keyboard = TransparentKeyboard()
+        keyboard.delegate = self
+        hexColorTextField.inputView = keyboard
         hexColorTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         updateBackground()
         
@@ -192,6 +196,20 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
 extension MainViewController: FavoriteColorDelegate {
     func colorUpdated(hex: String) {
         updateBackground(hex: hex)
+    }
+}
+
+// MARK: - KeyboardDelegate Extension
+
+extension MainViewController: KeyboardDelegate {
+    func backspace() {
+        guard let text = hexColorTextField.text else { return }
+        hexColorTextField.text = text[0..<text.count - 1]
+    }
+    
+    func charPressed(key: String) {
+        guard let text = hexColorTextField.text else { return }
+        hexColorTextField.text = text + key
     }
 }
 

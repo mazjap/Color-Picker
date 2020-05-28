@@ -23,6 +23,8 @@
 		0E33F1F3247E4E8500151B1A /* ColorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E33F1F2247E4E8500151B1A /* ColorController.swift */; };
 		0E33F1F5247F25D400151B1A /* ColorRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E33F1F4247F25D400151B1A /* ColorRepresentation.swift */; };
 		0E33F1FB247FAE7200151B1A /* FavoritesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E33F1FA247FAE7200151B1A /* FavoritesTableViewController.swift */; };
+		0EA44C6B247FBC38004FDEEB /* TransparentKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA44C6A247FBC38004FDEEB /* TransparentKeyboard.swift */; };
+		0EA44C6D247FBCB9004FDEEB /* KeyboardLetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA44C6C247FBCB9004FDEEB /* KeyboardLetter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +46,8 @@
 		0E33F1F2247E4E8500151B1A /* ColorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorController.swift; sourceTree = "<group>"; };
 		0E33F1F4247F25D400151B1A /* ColorRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorRepresentation.swift; sourceTree = "<group>"; };
 		0E33F1FA247FAE7200151B1A /* FavoritesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewController.swift; sourceTree = "<group>"; };
+		0EA44C6A247FBC38004FDEEB /* TransparentKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentKeyboard.swift; sourceTree = "<group>"; };
+		0EA44C6C247FBCB9004FDEEB /* KeyboardLetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardLetter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,8 +153,18 @@
 			isa = PBXGroup;
 			children = (
 				0E1F98E7247E3C6D00D2D49A /* FavoriteTableViewCell.swift */,
+				0EA44C6E247FBCBF004FDEEB /* Keyboard */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		0EA44C6E247FBCBF004FDEEB /* Keyboard */ = {
+			isa = PBXGroup;
+			children = (
+				0EA44C6A247FBC38004FDEEB /* TransparentKeyboard.swift */,
+				0EA44C6C247FBCB9004FDEEB /* KeyboardLetter.swift */,
+			);
+			path = Keyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -225,6 +239,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E1F98D8247E112600D2D49A /* CoreDataStack.swift in Sources */,
+				0EA44C6B247FBC38004FDEEB /* TransparentKeyboard.swift in Sources */,
+				0EA44C6D247FBCB9004FDEEB /* KeyboardLetter.swift in Sources */,
 				0E33F1FB247FAE7200151B1A /* FavoritesTableViewController.swift in Sources */,
 				0E1F98E8247E3C6D00D2D49A /* FavoriteTableViewCell.swift in Sources */,
 				0E1F98DD247E1EB100D2D49A /* String+Extension.swift in Sources */,
