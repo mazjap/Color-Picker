@@ -15,6 +15,7 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
     
     let colorController = ColorController()
     let cellSpacerHeight: CGFloat = 3
+    var buttons = [UIButton]()
     private lazy var frc: NSFetchedResultsController<Color>! = {
         let fetchRequest: NSFetchRequest<Color> = Color.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
@@ -36,8 +37,9 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
     
     // MARK: - IBOutlets
     
-    @IBOutlet private weak var starButton: UIButton!
     @IBOutlet private weak var hexColorTextField: UITextField!
+    @IBOutlet private weak var imagesButton: UIButton!
+    @IBOutlet private weak var starButton: UIButton!
     
     
     // MARK: - Lifecycle Functions
@@ -67,18 +69,24 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
     // MARK: - Private Functions
     
     private func setUp() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(starTapped(sender:)))
-        let holdGesture = UILongPressGestureRecognizer(target: self, action: #selector(starHold(sender:)))
-        tapGesture.numberOfTapsRequired = 1
-        starButton.addGestureRecognizer(tapGesture)
-        starButton.addGestureRecognizer(holdGesture)
+        let starTapGesture = UITapGestureRecognizer(target: self, action: #selector(starTapped(sender:)))
+        let starHoldGesture = UILongPressGestureRecognizer(target: self, action: #selector(starHold(sender:)))
+        starTapGesture.numberOfTapsRequired = 1
+        starButton.addGestureRecognizer(starTapGesture)
+        starButton.addGestureRecognizer(starHoldGesture)
+        updateStar()
+        
+        let imageTapGesture = UITapGestureRecognizer(target: self, action: #selector(imageTapped(sender:)))
+        imagesButton.addGestureRecognizer(imageTapGesture)
         
         hexColorTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         updateBackground()
         
-        starButton.tintColor = .white
-        starButton.imageView?.contentMode = .scaleAspectFit
-        updateStar()
+        buttons.append(contentsOf: [imagesButton, starButton])
+        for button in buttons {
+            button.tintColor = .white
+            button.imageView?.contentMode = .scaleAspectFit
+        }
     }
     
     private func setTextColor(using: UIColor) {
@@ -119,6 +127,11 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
     }
     
     @objc
+    private func imageTapped(sender: UITapGestureRecognizer) {
+        performSegue(withIdentifier: "ShowImageVCSegue", sender: self)
+    }
+    
+    @objc
     private func textFieldDidChange(_ textField: UITextField) {
         guard let text = textField.text else { return }
         updateBackground(hex: text)
@@ -133,6 +146,9 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
             destinationVC.delegate = self
             destinationVC.colorController = colorController
             destinationVC.color = view.backgroundColor
+        } else if segue.identifier == "ShowImageVCSegue" {
+            guard let destinationVC = segue.destination as? ImageViewController else { return }
+            destinationVC.viewDidLoad()
         }
     }
 }

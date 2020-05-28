@@ -23,6 +23,7 @@
 		0E1F98E8247E3C6D00D2D49A /* FavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1F98E7247E3C6D00D2D49A /* FavoriteTableViewCell.swift */; };
 		0E33F1F3247E4E8500151B1A /* ColorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E33F1F2247E4E8500151B1A /* ColorController.swift */; };
 		0E33F1F5247F25D400151B1A /* ColorRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E33F1F4247F25D400151B1A /* ColorRepresentation.swift */; };
+		0E33F1F7247F5A2D00151B1A /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E33F1F6247F5A2C00151B1A /* ImageViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		0E1F98E7247E3C6D00D2D49A /* FavoriteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTableViewCell.swift; sourceTree = "<group>"; };
 		0E33F1F2247E4E8500151B1A /* ColorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorController.swift; sourceTree = "<group>"; };
 		0E33F1F4247F25D400151B1A /* ColorRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorRepresentation.swift; sourceTree = "<group>"; };
+		0E33F1F6247F5A2C00151B1A /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 			children = (
 				0E1F98C0247E0FAC00D2D49A /* MainViewController.swift */,
 				0E1F98E5247E3AE700D2D49A /* FavoritesTableViewController.swift */,
+				0E33F1F6247F5A2C00151B1A /* ImageViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -234,6 +237,7 @@
 				0E1F98BD247E0FAC00D2D49A /* AppDelegate.swift in Sources */,
 				0E33F1F5247F25D400151B1A /* ColorRepresentation.swift in Sources */,
 				0E1F98E2247E26D800D2D49A /* UInt32+Extension.swift in Sources */,
+				0E33F1F7247F5A2D00151B1A /* ImageViewController.swift in Sources */,
 				0E1F98BF247E0FAC00D2D49A /* SceneDelegate.swift in Sources */,
 				0E33F1F3247E4E8500151B1A /* ColorController.swift in Sources */,
 				0E1F98E0247E206000D2D49A /* UIColor+Extension.swift in Sources */,
