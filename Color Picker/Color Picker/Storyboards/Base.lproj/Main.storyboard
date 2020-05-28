@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="y8Y-ri-lAr">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -12,16 +12,16 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="Color_Picker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="#333333" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dE5-tH-BMT">
-                                <rect key="frame" x="0.0" y="94" width="414" height="41"/>
+                                <rect key="frame" x="0.0" y="94" width="375" height="41"/>
                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="34"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gsS-dT-4ni">
-                                <rect key="frame" x="312.5" y="794.5" width="41.5" height="41.5"/>
+                                <rect key="frame" x="277.66666666666669" y="714.66666666666663" width="37.333333333333314" height="37.333333333333371"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="gsS-dT-4ni" secondAttribute="height" multiplier="1:1" id="MDL-pT-3Xq"/>
                                 </constraints>
@@ -31,15 +31,24 @@
                                 <rect key="frame" x="60" y="794.5" width="41.5" height="41.5"/>
                                 <state key="normal" image="photo.on.rectangle" catalog="system"/>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter a name for your color" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pqh-Si-E35">
+                                <rect key="frame" x="0.0" y="68.333333333333329" width="375" height="17.666666666666671"/>
+                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="GFO-Fi-C5Z" firstAttribute="width" secondItem="gsS-dT-4ni" secondAttribute="width" id="1f3-Pz-LGy"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="pqh-Si-E35" secondAttribute="trailing" id="1XN-DS-Z2T"/>
                             <constraint firstItem="dE5-tH-BMT" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="61m-im-scl"/>
                             <constraint firstItem="gsS-dT-4ni" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.1" id="6O5-qh-Bpk"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="gsS-dT-4ni" secondAttribute="trailing" constant="60" id="N5b-IY-zob"/>
                             <constraint firstAttribute="bottom" secondItem="GFO-Fi-C5Z" secondAttribute="bottom" constant="60" id="Uak-MB-0GI"/>
                             <constraint firstItem="GFO-Fi-C5Z" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="60" id="f9U-ci-NAl"/>
+                            <constraint firstItem="pqh-Si-E35" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="an0-iD-L8a"/>
+                            <constraint firstItem="dE5-tH-BMT" firstAttribute="top" secondItem="pqh-Si-E35" secondAttribute="bottom" constant="8" id="eqE-cs-qff"/>
                             <constraint firstAttribute="bottom" secondItem="gsS-dT-4ni" secondAttribute="bottom" constant="60" id="hPT-d7-fLI"/>
                             <constraint firstItem="dE5-tH-BMT" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="o1Y-GE-6CI"/>
                             <constraint firstItem="GFO-Fi-C5Z" firstAttribute="width" secondItem="GFO-Fi-C5Z" secondAttribute="height" multiplier="1:1" id="tI0-YX-g8O"/>
@@ -50,6 +59,7 @@
                     <navigationItem key="navigationItem" id="Zpq-w0-irp"/>
                     <connections>
                         <outlet property="hexColorTextField" destination="dE5-tH-BMT" id="o0S-Us-Vet"/>
+                        <outlet property="nameLabel" destination="pqh-Si-E35" id="Kv4-NT-CvH"/>
                         <outlet property="imagesButton" destination="GFO-Fi-C5Z" id="c8F-Fp-wOZ"/>
                         <outlet property="starButton" destination="gsS-dT-4ni" id="QCi-wR-njb"/>
                         <segue destination="JYF-so-oA5" kind="show" identifier="ShowFavoritesVCSegue" id="JPl-hs-ScD"/>
@@ -103,28 +113,28 @@
             <objects>
                 <viewController id="JYF-so-oA5" customClass="FavoritesTableViewController" customModule="Color_Picker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="11O-6W-5MN">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gtc-YX-GmJ">
-                                <rect key="frame" x="0.0" y="145.5" width="417" height="750.5"/>
+                                <rect key="frame" x="0.0" y="141.66666666666669" width="378" height="670.33333333333326"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FavoriteCell" id="mnE-yd-Nmj" customClass="FavoriteTableViewCell" customModule="Color_Picker" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="417" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="28" width="378" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mnE-yd-Nmj" id="kXB-qn-fqn">
-                                            <rect key="frame" x="0.0" y="0.0" width="417" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="378" height="43.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UlK-97-l6Y">
-                                                    <rect key="frame" x="30" y="11.5" width="34" height="21"/>
+                                                    <rect key="frame" x="25" y="11.333333333333336" width="34" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#HEXFFF" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4dE-dI-xdu">
-                                                    <rect key="frame" x="315" y="11.5" width="72" height="21"/>
+                                                    <rect key="frame" x="281" y="11.333333333333336" width="72" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -150,7 +160,7 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pC6-lT-ecP">
-                                <rect key="frame" x="30" y="74" width="41.5" height="41.5"/>
+                                <rect key="frame" x="29.999999999999996" y="74" width="37.666666666666657" height="37.666666666666657"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="pC6-lT-ecP" secondAttribute="height" multiplier="1:1" id="DIU-Eq-gDC"/>
                                 </constraints>
@@ -160,7 +170,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Favorites" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gpR-uh-60O">
-                                <rect key="frame" x="152.5" y="78" width="109" height="33.5"/>
+                                <rect key="frame" x="133" y="76" width="109" height="33.666666666666657"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
