@@ -20,6 +20,9 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
             updateCreatingColor()
         }
     }
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
+    }
     private lazy var frc: NSFetchedResultsController<Color>! = {
         let fetchRequest: NSFetchRequest<Color> = Color.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
@@ -58,6 +61,12 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         super.viewWillAppear(animated)
         
         updateStar()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        isCreatingColor = nil
     }
     
     // MARK: - Public Functions
@@ -143,7 +152,14 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
     
     @objc
     private func starHold(sender: UILongPressGestureRecognizer) {
-        performSegue(withIdentifier: "ShowFavoritesVCSegue", sender: self)
+        guard let navCon = navigationController else { return }
+        for vc in navCon.viewControllers {
+            if let _ = vc as? FavoritesTableViewController {
+                return
+            }
+        }
+        
+        performSegue(withIdentifier: "ShowFavoritesVCSegue", sender: nil)
     }
     
     @objc

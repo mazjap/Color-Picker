@@ -20,17 +20,21 @@ class FavoritesTableViewController: UIViewController, UITableViewDelegate, UITab
     var colorController: ColorController?
     var color: UIColor? {
         didSet {
-            update()
+            update(animate: false)
+        }
+    }
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if color?.textColor == UIColor.white {
+            return .lightContent
+        } else {
+            return .darkContent
         }
     }
     weak var delegate: FavoriteColorDelegate?
     private lazy var frc: NSFetchedResultsController<Color>! = {
         let fetchRequest: NSFetchRequest<Color> = Color.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
-        let frc = NSFetchedResultsController(fetchRequest: fetchRequest,
-                                             managedObjectContext: CoreDataStack.shared.mainContext,
-                                             sectionNameKeyPath: nil,
-                                             cacheName: nil)
+        let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataStack.shared.mainContext, sectionNameKeyPath: nil, cacheName: nil)
         frc.delegate = self
         
         do {
@@ -65,19 +69,15 @@ class FavoritesTableViewController: UIViewController, UITableViewDelegate, UITab
         update()
     }
     
-    private func update() {
+    private func update(animate: Bool = true) {
         guard let color = color else { return }
-        view.backgroundColor = color
-        tableView.backgroundColor = color
-        titleLabel.textColor = color.textColor
-        backButton.tintColor = color.textColor
+        
+        self.view.backgroundColor = color
+        self.tableView.backgroundColor = color
+        self.titleLabel.textColor = color.textColor
+        self.backButton.tintColor = color.textColor
     }
-    
-    private func popVC() {
-        navigationController?.popViewController(animated: false)
-        navigationController?.popViewController(animated: true)
-    }
-    
+
     // MARK: - TableView Functions
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -95,7 +95,8 @@ class FavoritesTableViewController: UIViewController, UITableViewDelegate, UITab
         tableView.deselectRow(at: indexPath, animated: true)
         guard let color = (tableView.cellForRow(at: indexPath) as? FavoriteTableViewCell)?.color else { return }
         delegate?.colorUpdated(hex: color.hexString)
-        popVC()
+        self.color = color.color
+        navigationController?.popViewController(animated: true)
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -108,8 +109,7 @@ class FavoritesTableViewController: UIViewController, UITableViewDelegate, UITab
     // MARK: - IBActions
     
     @IBAction func backPressed(_ sender: UIButton) {
-        popVC()
-
+        navigationController?.popViewController(animated: true)
     }
 }
 
@@ -125,10 +125,7 @@ extension FavoritesTableViewController: NSFetchedResultsControllerDelegate {
         tableView.endUpdates()
     }
     
-    internal func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
-                    didChange sectionInfo: NSFetchedResultsSectionInfo,
-                    atSectionIndex sectionIndex: Int,
-                    for type: NSFetchedResultsChangeType) {
+    internal func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
         switch type {
         case .insert:
             tableView.insertSections(IndexSet(integer: sectionIndex), with: .automatic)
@@ -139,11 +136,7 @@ extension FavoritesTableViewController: NSFetchedResultsControllerDelegate {
         }
     }
     
-    internal func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
-                    didChange anObject: Any,
-                    at indexPath: IndexPath?,
-                    for type: NSFetchedResultsChangeType,
-                    newIndexPath: IndexPath?) {
+    internal func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         switch type {
         case .insert:
             guard let newIndexPath = newIndexPath else { return }
