@@ -23,6 +23,7 @@
 		0E1F98E8247E3C6D00D2D49A /* FavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1F98E7247E3C6D00D2D49A /* FavoriteTableViewCell.swift */; };
 		0E33F1F3247E4E8500151B1A /* ColorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E33F1F2247E4E8500151B1A /* ColorController.swift */; };
 		0E33F1F5247F25D400151B1A /* ColorRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E33F1F4247F25D400151B1A /* ColorRepresentation.swift */; };
+		0E33F1F9247F5C0800151B1A /* ExportType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E33F1F8247F5C0800151B1A /* ExportType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		0E1F98E7247E3C6D00D2D49A /* FavoriteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTableViewCell.swift; sourceTree = "<group>"; };
 		0E33F1F2247E4E8500151B1A /* ColorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorController.swift; sourceTree = "<group>"; };
 		0E33F1F4247F25D400151B1A /* ColorRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorRepresentation.swift; sourceTree = "<group>"; };
+		0E33F1F8247F5C0800151B1A /* ExportType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +124,7 @@
 				0E1F98C5247E0FAC00D2D49A /* Color_Picker.xcdatamodeld */,
 				0E1F98DA247E124000D2D49A /* Color+Convenience.swift */,
 				0E33F1F4247F25D400151B1A /* ColorRepresentation.swift */,
+				0E33F1F8247F5C0800151B1A /* ExportType.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -225,6 +228,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E1F98D8247E112600D2D49A /* CoreDataStack.swift in Sources */,
+				0E33F1F9247F5C0800151B1A /* ExportType.swift in Sources */,
 				0E1F98E8247E3C6D00D2D49A /* FavoriteTableViewCell.swift in Sources */,
 				0E1F98DD247E1EB100D2D49A /* String+Extension.swift in Sources */,
 				0E1F98DB247E124000D2D49A /* Color+Convenience.swift in Sources */,

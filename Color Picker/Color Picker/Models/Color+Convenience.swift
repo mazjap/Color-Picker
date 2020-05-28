@@ -25,6 +25,27 @@ extension Color {
         UIColor(hexInt: UInt32(hex))
     }
     
+    func share(type: ExportType) -> String {
+        let colors = color.rgba
+        
+        switch type {
+        case .hex:
+            return "#\(hexString)"
+        case .uicolor:
+            return "UIColor(red: \(colors.red), green: \(colors.green), blue: \(colors.blue), alpha: \(colors.alpha)"
+        case .nscolor:
+            return "[NSColor colorWithRed:\(colors.red) green:\(colors.green) blue:0.\(colors.blue) alpha:\(colors.alpha)]"
+        case .cgcolor:
+            return "CGColorCreateGenericRGB(\(colors.red), \(colors.green), \(colors.blue), \(colors.alpha))"
+        case .javargba:
+            return "Color(\(colors.red * 255), \(colors.green * 255), \(colors.blue * 255), \(colors.alpha * 255))"
+        case .netargb:
+            return "Color.FromArgb(\(colors.alpha * 255), \(colors.red * 255), \(colors.green * 255), \(colors.blue * 255))"
+        case .openglrgba:
+            return "glColor4f(\(colors.red), \(colors.green), \(colors.blue), \(colors.alpha))"
+        }
+    }
+    
     static func == (lhs: Color, rhs: ColorRepresentation) -> Bool {
         return lhs.name == rhs.name && UInt32(lhs.hex) == rhs.hex
     }
