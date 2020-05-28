@@ -15,7 +15,11 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
     
     let colorController = ColorController()
     let cellSpacerHeight: CGFloat = 3
-    var isCreatingColor: String?
+    var isCreatingColor: String? {
+        didSet {
+            updateCreatingColor()
+        }
+    }
     private lazy var frc: NSFetchedResultsController<Color>! = {
         let fetchRequest: NSFetchRequest<Color> = Color.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
@@ -39,6 +43,7 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
     
     @IBOutlet private weak var starButton: UIButton!
     @IBOutlet private weak var hexColorTextField: UITextField!
+    @IBOutlet weak var nameLabel: UILabel!
     
     
     // MARK: - Lifecycle Functions
@@ -64,6 +69,7 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         hexColorTextField.delegate = self
         hexColorTextField.text = "#\(str)"
         let color = UIColor(hex: str)
+        nameLabel.textColor = color.textColor
         UIView.animate(withDuration: hex == "333333" ? 0 : 0.5) {
             self.view.backgroundColor = color
             self.starButton.tintColor = color.textColor
@@ -84,6 +90,8 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         hexColorTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         updateBackground()
         
+        nameLabel.isHidden = true
+        
         starButton.tintColor = .white
         starButton.imageView?.contentMode = .scaleAspectFit
     }
@@ -96,7 +104,8 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
     
     private func updateStar(bool: Bool? = nil) {
         if let text = hexColorTextField.text {
-            let boolean = bool ?? isFav(hex: text)
+            let boolean = bool == nil ? isFav(hex: text) : bool!
+            NSLog("MainViewController.updateStar boolean value: \(boolean)")
             starButton.setImage(UIImage(systemName: boolean ? "star.fill" : "star"), for: .normal)
         }
     }
@@ -111,6 +120,17 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         
         return false
     }
+    
+    private func updateCreatingColor() {
+        if let _ = isCreatingColor {
+            nameLabel.isHidden = false
+            hexColorTextField.text = ""
+            hexColorTextField.placeholder = "Name"
+        } else {
+            nameLabel.isHidden = true
+            hexColorTextField.placeholder = "#333333"
+        }
+    }
 
     // MARK: - Objective-C Functions
     
@@ -118,7 +138,6 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
     private func starTapped(sender: UITapGestureRecognizer) {
         guard let hex = hexColorTextField.text, hex.isValidateHex else { return } // TODO: - Alert user that hex is invalid
         updateStar()
-        hexColorTextField.text = ""
         isCreatingColor = hex
     }
     
