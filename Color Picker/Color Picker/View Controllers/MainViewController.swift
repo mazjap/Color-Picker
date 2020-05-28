@@ -15,6 +15,11 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
     
     let colorController = ColorController()
     let cellSpacerHeight: CGFloat = 3
+    var isCreatingColor: String? {
+        didSet {
+            updateCreatingColor()
+        }
+    }
     private lazy var frc: NSFetchedResultsController<Color>! = {
         let fetchRequest: NSFetchRequest<Color> = Color.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
@@ -38,6 +43,7 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
     
     @IBOutlet private weak var starButton: UIButton!
     @IBOutlet private weak var hexColorTextField: UITextField!
+    @IBOutlet weak var nameLabel: UILabel!
     
     
     // MARK: - Lifecycle Functions
@@ -48,14 +54,22 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         setUp()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        updateStar()
+    }
+    
     // MARK: - Public Functions
     
     func updateBackground(hex: String = "333333") {
         let str = hex.remove(char: "#".first!)
         guard str.isValidateHex else { return }
         
+        hexColorTextField.delegate = self
         hexColorTextField.text = "#\(str)"
         let color = UIColor(hex: str)
+        nameLabel.textColor = color.textColor
         UIView.animate(withDuration: hex == "333333" ? 0 : 0.5) {
             self.view.backgroundColor = color
             self.starButton.tintColor = color.textColor
@@ -76,9 +90,10 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         hexColorTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         updateBackground()
         
+        nameLabel.isHidden = true
+        
         starButton.tintColor = .white
         starButton.imageView?.contentMode = .scaleAspectFit
-        updateStar()
     }
     
     private func setTextColor(using: UIColor) {
@@ -87,9 +102,11 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         }
     }
     
-    private func updateStar() {
+    private func updateStar(bool: Bool? = nil) {
         if let text = hexColorTextField.text {
-            starButton.setImage(UIImage(systemName: isFav(hex: text) ? "star.fill" : "star"), for: .normal)
+            let boolean = bool == nil ? isFav(hex: text) : bool!
+            NSLog("MainViewController.updateStar boolean value: \(boolean)")
+            starButton.setImage(UIImage(systemName: boolean ? "star.fill" : "star"), for: .normal)
         }
     }
     
@@ -103,14 +120,25 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         
         return false
     }
+    
+    private func updateCreatingColor() {
+        if let _ = isCreatingColor {
+            nameLabel.isHidden = false
+            hexColorTextField.text = ""
+            hexColorTextField.placeholder = "Name"
+        } else {
+            nameLabel.isHidden = true
+            hexColorTextField.placeholder = "#333333"
+        }
+    }
 
     // MARK: - Objective-C Functions
     
     @objc
     private func starTapped(sender: UITapGestureRecognizer) {
         guard let hex = hexColorTextField.text, hex.isValidateHex else { return } // TODO: - Alert user that hex is invalid
-        colorController.add(name: "TEST", hex: hex.hexUInt)
         updateStar()
+        isCreatingColor = hex
     }
     
     @objc
@@ -121,8 +149,14 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
     @objc
     private func textFieldDidChange(_ textField: UITextField) {
         guard let text = textField.text else { return }
-        updateBackground(hex: text)
-        updateStar()
+        if isCreatingColor == nil {
+            updateBackground(hex: text)
+            updateStar()
+            
+            if !text.isValidateHex {
+                textField.text = "#"
+            }
+        }
     }
     
     // MARK: - Segues
@@ -142,5 +176,26 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
 extension MainViewController: FavoriteColorDelegate {
     func colorUpdated(hex: String) {
         updateBackground(hex: hex)
+    }
+}
+
+// MARK: - UITextFieldDelegate Extension
+
+extension MainViewController: UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        starButton.isHidden = false
+        guard let hex = isCreatingColor, let text = hexColorTextField.text, !text.isEmpty else { return }
+        colorController.add(name: text, hex: hex.hexUInt)
+        isCreatingColor = nil
+        updateStar(bool: true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        starButton.isHidden = true
     }
 }
